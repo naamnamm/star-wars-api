@@ -1,69 +1,117 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './css/App.css';
-import MainTable from './components/MainTable';
+import TableMain from './components/TableMain';
 import SearchBar from './components/SearchBar';
+import Pagination from './components/Pagination';
 import axios from 'axios';
 
+const App = () => {
+  const [character, setCharacter] = useState([]);
+  const [search, setSearch] = useState("")
+  const [charactersPerpage] = useState(10)
 
-class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      results: [],
-      totalPeoplePages: 9,
-      planets: [],
-      search: ""
-    }
-  }
-
-  componentDidMount() {
-    const peopleUrl = 'https://swapi.dev/api/people?page='
-    const planetUrl = 'http://swapi.dev/api/planets/'
+  const getPeopleData = async () => {
+    const peopleUrl = 'https://swapi.dev/api/people?page=';
+    const totalPeoplePages = 9
     const range = (x) => [...Array(x).keys()];
-    let process = (promise) => {
-      promise.then(data => {
-        console.log(data.data.name)
-      })
+
+    try {
+      const promises = range(totalPeoplePages)
+        .map(page => axios.get(peopleUrl + (page + 1)))
+      const responses = await Promise.all(promises)
+      const results = responses.map(data => data.data.results).flat()
+
+      return results
+    }
+    catch (err) {
+      console.log(err.message)
+    }
+  }
+
+  // const getNestedData = async (arrayOfCharacters) => {
+  //   try {
+  //     for (let character of arrayOfCharacters) {
+  //       const homeworld = await axios.get(character.homeworld)
+  //       character.homeworld = homeworld.data.name
+
+  //       const species = character.species ? await axios.get(character.species) : null
+  //       character.species = species.data.name
+  //     }
+
+  //     return arrayOfCharacters
+  //   }
+
+  //   catch (err) {
+  //     console.log(err.message)
+  //   }
+  // }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const peopleData = await getPeopleData();
+      //const completedData = await getNestedData(peopleData);
+
+      setCharacter(peopleData)
     }
 
-    axios
-      .all(range(this.state.totalPeoplePages)
-        .map(page => axios.get(peopleUrl + (page + 1))))
-      .then(res => {
-        let mappedArr = (res.map(res => res.data.results)).flat()
-        return mappedArr
-      })
-      .then(arr =>
-        arr.map(arr => arr.homeworld ?
-          { ...arr, homeworld: process(axios.get(arr.homeworld)) }
-          : { ...arr })
-      )
-      .then(arr => this.setState({ results: arr }))
-      .catch(err => console.log(err))
+    fetchData();
+  }, [])
+
+
+  const handleChange = (e) => {
+    setSearch(e.target.value)
   }
 
-  handleChange = (e) => {
-    this.setState({ search: e.target.value })
-  }
+  return (
+    <div className="App">
+      <header className="App-header"></header>
 
-  render() {
-    console.log(this.state.results)
-    console.log(this.state.planets)
-    return (
-      <div className="App">
-        <header className="App-header"></header>
+      <SearchBar handleChange={handleChange} />
 
-        <SearchBar handleChange={this.handleChange} />
+      <TableMain character={character} search={search} charactersPerpage={charactersPerpage} />
 
-        <MainTable character={this.state.results} search={this.state.search} />
+      <Pagination totalCharacters={character} charactersPerpage={charactersPerpage} />
 
-      </div>
-    );
-  }
+    </div>
+  );
+
 }
 
 export default App;
 
+
+//pagination should be showing 9 page (Math.ceil(character/10))
+
+// componentDidMount() {
+//   const peopleUrl = 'https://swapi.dev/api/people?page='
+//   const range = (x) => [...Array(x).keys()];
+//   let process = (promise) => {
+//     promise.then(res => res.data)
+//       .then(data => {
+//         let newArray = [].push(data.name)
+//         console.log(newArray)
+//       })
+//   }
+
+
+//   axios
+//     .all(range(this.state.totalPeoplePages)
+//       .map(page => axios.get(peopleUrl + (page + 1))))
+//     .then(res => {
+//       let mappedArr = (res.map(res => res.data.results)).flat()
+//       return mappedArr
+//     })
+//     .then(arr =>
+//       arr.map((arr, index) => arr.homeworld ?
+//         { ...arr, homeworld: process(axios.get(arr.homeworld)) }
+//         : { ...arr })
+//     )
+//     .then(arr => this.setState({ results: arr }))
+//     .catch(err => console.log(err))
+// }
+
+
+//const planetUrl = 'http://swapi.dev/api/planets/'
 // axios.all(
 //   range(this.state.totalPlanetPages)
 //     .map(page => axios.get(planetUrl + (page + 1))))

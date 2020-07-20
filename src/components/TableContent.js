@@ -1,6 +1,8 @@
 import React from 'react';
 
-function MainContent(props) {
+function TableContent(props) {
+
+
   return (
     <tr>
       <td>{props.character.name}</td>
@@ -13,7 +15,7 @@ function MainContent(props) {
   )
 }
 
-export default MainContent
+export default TableContent
 
 //<tr>
 //<td>{props.character.name}</td>
