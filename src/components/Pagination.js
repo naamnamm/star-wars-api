@@ -1,8 +1,8 @@
 import React from 'react'
 
 
-const pagination = ({ totalCharacters, charactersPerpage }) => {
-  let totalPages = Math.ceil(totalCharacters.length / charactersPerpage)
+const pagination = ({ totalCharacters, charactersPerPage, handleClick }) => {
+  let totalPages = Math.ceil(totalCharacters.length / charactersPerPage)
 
   let pages = []
 
@@ -10,13 +10,13 @@ const pagination = ({ totalCharacters, charactersPerpage }) => {
     pages.push(i)
   }
 
-  const displayPage = (e) => {
-    console.log(e)
-  }
+  // const displayPage = (e) => {
+  //   console.log(e)
+  // }
 
   const pagePagination = pages.map(page => (
     <li key={page}>
-      <a href="#" onClick={() => displayPage(page)}> {page} </a>
+      <a href="!#" onClick={() => handleClick(page)}> {page} </a>
     </li>
   )
   )

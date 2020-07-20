@@ -8,7 +8,8 @@ import axios from 'axios';
 const App = () => {
   const [character, setCharacter] = useState([]);
   const [search, setSearch] = useState("")
-  const [charactersPerpage] = useState(10)
+  const [charactersPerPage] = useState(10)
+  const [currentPage, setCurrentPage] = useState(1)
 
   const getPeopleData = async () => {
     const peopleUrl = 'https://swapi.dev/api/people?page=';
@@ -28,23 +29,23 @@ const App = () => {
     }
   }
 
-  // const getNestedData = async (arrayOfCharacters) => {
-  //   try {
-  //     for (let character of arrayOfCharacters) {
-  //       const homeworld = await axios.get(character.homeworld)
-  //       character.homeworld = homeworld.data.name
+  const getNestedData = async (arrayOfCharacters) => {
+    try {
+      for (let character of arrayOfCharacters) {
+        const homeworld = await axios.get(character.homeworld)
+        character.homeworld = homeworld.data.name
 
-  //       const species = character.species ? await axios.get(character.species) : null
-  //       character.species = species.data.name
-  //     }
+        const species = character.species ? await axios.get(character.species) : null
+        character.species = species.data.name
+      }
 
-  //     return arrayOfCharacters
-  //   }
+      return arrayOfCharacters
+    }
 
-  //   catch (err) {
-  //     console.log(err.message)
-  //   }
-  // }
+    catch (err) {
+      console.log(err.message)
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,10 +58,22 @@ const App = () => {
     fetchData();
   }, [])
 
+  const handleClick = (currentPage) => {
+    console.log(currentPage)
+    setCurrentPage(currentPage)
+  }
 
   const handleChange = (e) => {
     setSearch(e.target.value)
   }
+
+  const endingIndex = Number(currentPage * charactersPerPage)
+  const startingIndex = Number(endingIndex - charactersPerPage)
+  console.log(startingIndex, endingIndex)
+
+  const currentCharacters = character.slice(startingIndex, endingIndex)
+
+
 
   return (
     <div className="App">
@@ -68,9 +81,9 @@ const App = () => {
 
       <SearchBar handleChange={handleChange} />
 
-      <TableMain character={character} search={search} charactersPerpage={charactersPerpage} />
+      <TableMain character={currentCharacters} search={search} />
 
-      <Pagination totalCharacters={character} charactersPerpage={charactersPerpage} />
+      <Pagination handleClick={handleClick} totalCharacters={character} charactersPerPage={charactersPerPage} />
 
     </div>
   );
