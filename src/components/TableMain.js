@@ -3,21 +3,6 @@ import TableContent from './TableContent';
 
 function TableMain({ character, search }) {
 
-  //to show the first 10
-  // slice first 10
-  // starting index = 0
-  // ending index = 10
-  // page 1 - show 1-10
-  // page 2 - show 11-20
-  // page 3 - show 21-30
-
-  // 1 - slice 0-10 
-  // ending index = current page(1) * characterPerpage (10)
-  // starting index = ending(10) - characterperpage(10)
-  // 2 - slice 11-20
-  // EI = 2*10 = 20
-  // SI = 20-10 = 10
-
   const showAll = character.map(character =>
     <TableContent key={character.name} character={character} />
   )
