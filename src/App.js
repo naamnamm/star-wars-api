@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './css/App.css';
-import TableMain from './components/TableMain';
+import MainTable from './components/MainTable';
 import SearchBar from './components/SearchBar';
 import Pagination from './components/Pagination';
-import LoadingPage from './components/LoadingPage';
 import axios from 'axios';
 
 const App = () => {
@@ -11,25 +10,14 @@ const App = () => {
   const [search, setSearch] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
   const [loading, setLoading] = useState(true)
-  const [currentCharacters, setCurrentCharacters] = useState([])
-  const [onMount, setOnMount] = useState(true)
-
-  //const totalCharacters = ''
-  const charactersPerPage = 10
-  const endingIndex = Number(currentPage * charactersPerPage)
-  const startingIndex = Number(endingIndex - charactersPerPage)
 
   const getPeopleData = async () => {
     const peopleUrl = 'https://swapi.dev/api/people?page=';
-    //const totalPeoplePages = 9
-    //const range = (x) => [...Array(x).keys()];
 
     try {
       const responses = await axios.get(peopleUrl + currentPage)
-      //const results = responses.data.results
 
       return responses
-      //return results
     }
     catch (err) {
       console.log(err.message)
@@ -54,42 +42,14 @@ const App = () => {
     }
   }
 
-  const sliceData = async (allCharacters) => {
-    try {
-      console.log(allCharacters)
-      const currentCharacters = await allCharacters.slice(startingIndex, endingIndex)
-      return currentCharacters
-    }
-
-    catch (err) {
-      console.log(err.message)
-    }
-  }
-
-  useEffect(() => {
-    //when components mount 
-    //if the data is still loading showloading else showresult
-    // const onMount = character ? showLoading : showResults
-    // setOnMount(false)
-    // return () => {
-    //   cleanup
-    // }
-  }, [])
-
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true)
-      const peopleData = await getPeopleData();
-      //totalCharacters = peopleData.data.count
-      console.log(peopleData.data)
-      const completedData = await getNestedData(peopleData.data.results);
 
-      console.log(completedData)
+      const peopleData = await getPeopleData();
+
+      const completedData = await getNestedData(peopleData.data.results);
       setCharacter(completedData)
-      //setCharacter(peopleData)
-      // const currentCharacters = await sliceData(completedData)
-      // setCurrentCharacters(currentCharacters)
-      // console.log(currentCharacters)
 
       setLoading(false)
     }
@@ -98,30 +58,20 @@ const App = () => {
   }, [currentPage])
 
   const handleClick = (currentPage) => {
-    console.log(currentPage, loading)
     setCurrentPage(currentPage)
   }
 
   const handleChange = (e) => {
     setSearch(e.target.value)
   }
-  // if firstloading // show jumbotron
-  //if loading = true // show loading
-  // otherwise // show content
-
-  const showContent =
-    <div className="App">
-      <header className="App-header"></header>
-      <SearchBar handleChange={handleChange} />
-      <TableMain character={character} search={search} />
-      <Pagination handleClick={handleClick} totalCharacters={character} charactersPerPage={charactersPerPage} />
-    </div>
-
-  const renderContent = loading ? <LoadingPage /> : showContent
-
 
   return (
-    renderContent
+    <div className="App">
+      <header className="App-header"><h1>Star Wars API</h1></header>
+      <SearchBar handleChange={handleChange} className='rounded' />
+      <MainTable character={character} search={search} loading={loading} />
+      <Pagination handleClick={handleClick} />
+    </div>
   );
 
 }

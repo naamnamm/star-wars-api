@@ -1,7 +1,8 @@
 import React from 'react'
+import { Button } from 'reactstrap';
 
 
-const pagination = ({ totalCharacters, charactersPerPage, handleClick }) => {
+const pagination = ({ handleClick }) => {
 
   let pages = []
 
@@ -9,16 +10,14 @@ const pagination = ({ totalCharacters, charactersPerPage, handleClick }) => {
     pages.push(i)
   }
 
-  // const displayPage = (e) => {
-  //   console.log(e)
-  // }
+  const pagePagination = pages.map(page =>
+    <Button key={page} onClick={() => handleClick(page)} className="mx-1"> {page} </Button>
+  )
 
-  const pagePagination = pages.map(page => (
-    <li key={page}>
-      <button onClick={() => handleClick(page)} > {page} </button>
-    </li>
-  )
-  )
+  // const pagePagination = pages.map(page =>
+  //   <a href="#" key={page} onClick={() => handleClick(page)}
+  //     className="mx-1"> {page} </a>
+  // )
 
   return (
     <ul>
@@ -30,4 +29,4 @@ const pagination = ({ totalCharacters, charactersPerPage, handleClick }) => {
 export default pagination
 
 
-//page 1 - display 1-10
+
