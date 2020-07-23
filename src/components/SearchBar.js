@@ -10,7 +10,6 @@ function SearchBar(props) {
         type="text"
         placeholder="Search character"
         onChange={props.handleChange} />
-
     </nav>
   )
 }
