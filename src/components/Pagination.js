@@ -14,11 +14,6 @@ const pagination = ({ handleClick }) => {
     <Button key={page} onClick={() => handleClick(page)} className="mx-1"> {page} </Button>
   )
 
-  // const pagePagination = pages.map(page =>
-  //   <a href="#" key={page} onClick={() => handleClick(page)}
-  //     className="mx-1"> {page} </a>
-  // )
-
   return (
     <ul>
       {pagePagination}
