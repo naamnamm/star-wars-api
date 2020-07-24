@@ -27,10 +27,12 @@ const App = () => {
   const getNestedData = async (arrayOfCharacters) => {
     try {
       for (let character of arrayOfCharacters) {
-        const homeworld = await axios.get(character.homeworld)
+        const homeworld = await axios.get(character.homeworld.replace('http', 'https'))
         character.homeworld = homeworld.data.name
 
-        const species = character.species ? await axios.get(character.species) : null
+        const species = character.species
+          ? await axios.get(character.species.replace('http', 'https'))
+          : null
         character.species = species.data.name
       }
 
