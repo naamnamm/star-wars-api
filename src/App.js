@@ -16,7 +16,7 @@ const App = () => {
 
     try {
       const responses = await axios.get(peopleUrl + currentPage)
-
+      //console.log(responses)
       return responses
     }
     catch (err) {
@@ -30,10 +30,12 @@ const App = () => {
         const homeworld = await axios.get(character.homeworld.replace('http', 'https'))
         character.homeworld = homeworld.data.name
 
-        const species = character.species
-          ? await axios.get(character.species.replace('http', 'https'))
+        const species = character.species.length >= 1
+          ? await (await axios.get(character.species[0].replace('http', 'https'))).data.name
           : null
-        character.species = species.data.name
+
+        character.species = species
+
       }
 
       return arrayOfCharacters
@@ -51,6 +53,7 @@ const App = () => {
       const peopleData = await getPeopleData();
 
       const completedData = await getNestedData(peopleData.data.results);
+
       setCharacter(completedData)
 
       setLoading(false)

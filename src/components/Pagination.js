@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from 'reactstrap';
 
 
-const pagination = ({ handleClick }) => {
+const Pagination = ({ handleClick }) => {
 
   let pages = []
 
@@ -21,7 +21,7 @@ const pagination = ({ handleClick }) => {
   )
 }
 
-export default pagination
+export default Pagination
 
 
 
