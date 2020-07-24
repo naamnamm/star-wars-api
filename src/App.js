@@ -13,12 +13,12 @@ const App = () => {
 
   const getPeopleData = async () => {
     const peopleUrl = 'https://swapi.dev/api/people?page=';
-
     try {
       const responses = await axios.get(peopleUrl + currentPage)
-      //console.log(responses)
+
       return responses
     }
+
     catch (err) {
       console.log(err.message)
     }
@@ -35,7 +35,6 @@ const App = () => {
           : null
 
         character.species = species
-
       }
 
       return arrayOfCharacters
@@ -73,8 +72,11 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header"><h1>Star Wars API</h1></header>
+
       <SearchBar handleChange={handleChange} className='rounded' />
+
       <MainTable character={character} search={search} loading={loading} />
+
       <Pagination handleClick={handleClick} />
     </div>
   );
