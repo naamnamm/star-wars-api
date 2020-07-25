@@ -1,13 +1,13 @@
 import React from 'react';
 
-function SearchBar(props) {
+const SearchBar = ({ handleChange }) => {
   return (
-    <nav className='mt-3'>
+    <nav className='mt-3 rounded'>
       <input
         name="search"
         type="text"
         placeholder="Search character"
-        onChange={props.handleChange} />
+        onChange={handleChange} />
     </nav>
   )
 }

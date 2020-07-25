@@ -12,7 +12,7 @@ const App = () => {
   const [loading, setLoading] = useState(true)
 
   const getPeopleData = async () => {
-    const peopleUrl = 'https://swapi.dev/api/people?page=';
+    const peopleUrl = 'https://swapi.dev/api/people/?page=';
     try {
       const responses = await axios.get(peopleUrl + currentPage)
 
@@ -73,7 +73,7 @@ const App = () => {
     <div className="App">
       <header className="App-header"><h1>Star Wars API</h1></header>
 
-      <SearchBar handleChange={handleChange} className='rounded' />
+      <SearchBar handleChange={handleChange} />
 
       <MainTable character={character} search={search} loading={loading} />
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MainTable({ character, search, loading }) {
+const MainTable = ({ character, search, loading }) => {
 
   const showLoading = <tr><td colSpan="6" >Loading...</td></tr>
 
