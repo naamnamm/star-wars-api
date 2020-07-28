@@ -11,19 +11,6 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [loading, setLoading] = useState(true)
 
-  const getPeopleData = async () => {
-    const peopleUrl = 'https://swapi.dev/api/people/?page=';
-    try {
-      const responses = await axios.get(peopleUrl + currentPage)
-
-      return responses
-    }
-
-    catch (err) {
-      console.log(err.message)
-    }
-  }
-
   const getNestedData = async (arrayOfCharacters) => {
     try {
       for (let character of arrayOfCharacters) {
@@ -46,6 +33,19 @@ const App = () => {
   }
 
   useEffect(() => {
+    const getPeopleData = async () => {
+      const peopleUrl = 'https://swapi.dev/api/people/?page=';
+      try {
+        const responses = await axios.get(peopleUrl + currentPage)
+
+        return responses
+      }
+
+      catch (err) {
+        console.log(err.message)
+      }
+    }
+
     const fetchData = async () => {
       setLoading(true)
 
