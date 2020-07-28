@@ -9,9 +9,9 @@ View Application on [Heroku](https://naamp-star-wars-api.herokuapp.com/)
 ## Summary
 This application is essentially about getting the data from an endpoint (Swapi) and displaying it using the React framework. 
 
-First of all, I learn how to fetch the data using Axios get request. With the utilization of [Postman](https://www.postman.com/), it makes understand the data structure of the results and was able to get the exact piece of information I want from the request. 
+First of all, I learn how to fetch the data using Axios get requests. With the utilization of [Postman](https://www.postman.com/), it makes me understand the data structure of the results. Then, I was able to get the exact piece of information I want back from the request. 
 
-Also, while an app was waiting for the data to come back, async/await makes it easier to handle multiply promises (asynchronous programming) which make the page smoothly transition from loading to displaying the results. 
+Also, while an app was waiting for the data to come back, async/await makes it easier to handle multiply promises/requests (asynchronous programming) which makes the page smoothly transition from loading to displaying the results. 
 
 As always, It's fun indeed to learn and create something new. I'm pretty comfortable with react now. 
 
