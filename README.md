@@ -1,68 +1,31 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Star Wars API 
 
-## Available Scripts
+App built with React framework and Bootstrap that pulls the data from [Swapi](https://swapi.dev/) using axios.
 
-In the project directory, you can run:
+View Application on [Heroku](https://naamp-star-wars-api.herokuapp.com/)
 
-### `npm start`
+<img src="https://user-images.githubusercontent.com/53867191/88716266-d1dcf700-d0ec-11ea-8699-e727f2fc4829.png" />
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Summary
+This application is essentially about getting the data from an endpoint (Swapi) and displaying it using the React framework. 
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+First of all, I learn how to fetch the data using Axios get request. With the utilization of [Postman](https://www.postman.com/), it makes understand the data structure of the results and was able to get the exact piece of information I want from the request. 
 
-### `npm test`
+Also, while an app was waiting for the data to come back, async/await makes it easier to handle multiply promises (asynchronous programming) which make the page smoothly transition from loading to displaying the results. 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+As always, It's fun indeed to learn and create something new. I'm pretty comfortable with react now. 
 
-### `npm run build`
+## Built With
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [React](https://reactjs.org/)
+- [NodeJS](https://nodejs.org/en/)
+- [Bootstrap](https://getbootstrap.com/) & [Reactstrap](https://reactstrap.github.io/)
+- [Axios](https://www.npmjs.com/package/axios)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Deployment
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [Heroku](https://www.heroku.com) 
 
-### `npm run eject`
+## Author
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Naam Pondpat - *Full Stack Software Developer* - [LinkedIn](https://www.linkedin.com/in/naam-pondpat-638153150/)

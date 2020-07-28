@@ -6,7 +6,7 @@ const MainTable = ({ character, search, loading }) => {
 
   const showAll = character.map(character =>
     <tr key={character.name}>
-      <td>{character.name}</td>
+      <td className="character-name">{character.name}</td>
       <td>{character.birth_year}</td>
       <td>{character.height}</td>
       <td>{character.mass}</td>
